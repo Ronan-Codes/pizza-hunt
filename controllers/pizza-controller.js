@@ -85,15 +85,3 @@ module.exports = pizzaController;
     }
     }
 */
-
-const dogObject = {
-    // this...
-    bark: function() {
-      console.log('Woof!');
-    },
-
-    // ... is the same as this
-    bark() {
-      console.log('Woof!');
-    }
-}
