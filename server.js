@@ -22,6 +22,6 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/pizza-hunt', {
 // if database pizza-hunt isn't created, MongoDB will create the db before connecting to it.
 
 // Use this to log mongo queries being executed!
-mongoose.set('debug', false);
+mongoose.set('debug', true);
 
 app.listen(PORT, () => console.log(`🌍 Connected on localhost:${PORT}`));
