@@ -6,6 +6,14 @@ const pizzaController = {
     // Get all pizzas. Like findAll(). Callback function for the GET /api/pizzas route
     getAllPizza(req, res) {
         Pizza.find({})
+            .populate({
+                path: 'comments',
+                // include everything but __v (notice minus sign)
+                select: '-__v'
+            })
+            // same function as select above
+            .select('-__v')
+            .sort({ _id: -1 })
             .then(dbPizzaData => res.json(dbPizzaData))
             .catch(err => {
                 console.log(err);
@@ -17,6 +25,11 @@ const pizzaController = {
     // Destructured params out of req, since it's only data we need to fulfill request
     getPizzaById({ params }, res) {
         Pizza.findOne({ _id: params.id })
+            .populate({
+                path: 'comments',
+                select: '-__v'
+            })
+            .select('-__v')
             .then(dbPizzaData => {
                 // if no pizza is found, send 404
                 if (!dbPizzaData) {
@@ -61,6 +74,7 @@ const pizzaController = {
                     res.status(404).json({ message: 'No pizza found with this id!' });
                     return;
                 }
+                // or true
                 res.json(dbPizzaData);
             })
             .catch(err => res.status(400).json(err));

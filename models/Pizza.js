@@ -1,5 +1,6 @@
-const { schema, model, Schema } = require('mongoose')
 // We could import the entire mongoose library, but we only need to worry about the Schema constructor and model function
+const { schema, model, Schema } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 
 const PizzaSchema = new Schema(
   {
@@ -11,7 +12,9 @@ const PizzaSchema = new Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now
+      default: Date.now,
+      // make sure to import functions used in get (dateFormat) and activate getters in toJSON below
+      get: (createdAtVal) => dateFormat(createdAtVal)
     },
     size: {
       type: String,
@@ -29,6 +32,7 @@ const PizzaSchema = new Schema(
     // tells schema that it can use virtuals
     toJSON: {
       virtuals: true,
+      getters: true
     },
     id: false
     // We set id to false because this is a virtual that Mongoose returns, and we don’t need it.
