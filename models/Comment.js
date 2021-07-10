@@ -1,11 +1,8 @@
 // For CommentSchema
-const { schema, model, Schema } = require('mongoose');
+const { schema, model, Schema, Types } = require('mongoose');
 // For ReplySchema
-const { Schema, model, Types } = require('mongoose');
+/* const { Schema, model, Types } = require('mongoose'); */
 // For Both
-const dateFormat = require('../utils/dateFormat');
-
-// for get
 const dateFormat = require('../utils/dateFormat');
 // Don't forget to add toJSON to both schemas
 
