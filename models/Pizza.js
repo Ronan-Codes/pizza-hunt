@@ -5,10 +5,17 @@ const dateFormat = require('../utils/dateFormat');
 const PizzaSchema = new Schema(
   {
     pizzaName: {
-      type: String
+      type: String,
+      // validation - set to true or custom message
+      // don't forget to include runValidators: true in pizza-controllers routes (except create)
+      required: 'You need to provide a pizza name!',
+      // works like JV .trim() (Good for username & pass)
+      trim: true
     },
     createdBy: {
-      type: String
+      type: String,
+      required: true,
+      trim: true,
     },
     createdAt: {
       type: Date,
@@ -18,6 +25,8 @@ const PizzaSchema = new Schema(
     },
     size: {
       type: String,
+      required: true,
+      enum: ['Personal', 'Small', 'Medium', 'Large', 'Extra Large'],
       default: 'Large'
     },
     toppings: [],
